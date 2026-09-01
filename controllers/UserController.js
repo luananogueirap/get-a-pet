@@ -117,7 +117,7 @@ module.exports = class UserController{
 
         const id = req.params.id
 
-        const user = await User.findById(id)
+        const user = await User.findById(id).select('-password')
 
         if(!user){
             res.status(422).json({message: 'user not found'})
@@ -125,5 +125,10 @@ module.exports = class UserController{
         }
 
         res.status(200).json({user})
+    }
+
+    static async editUser (req, res){
+        res.status(200).json({message: 'succesfull update'})
+        return
     }
 }
