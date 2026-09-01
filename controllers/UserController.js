@@ -129,13 +129,17 @@ module.exports = class UserController{
     }
 
     static async editUser (req, res){
-        const id = req.params.id
 
         // check user
         const token = getToken(req)
-        const user = getUserByToken(token)
+        const user = await getUserByToken(token)
+        
+        const name = req.body.name
+        const email = req.body.email
+        const phone = req.body.phone
+        const password = req.body.password
+        const confirmpassword = req.body.confirmpassword
 
-        const {name, email, phone, password, confirmPassword} = req.body
 
         let image = ''
 
@@ -155,7 +159,7 @@ module.exports = class UserController{
         const userExists = await User.findOne({email:email})
 
         if(user.email !== email && userExists){
-            res.status(422).json({message: 'user not found'})
+            res.status(422).json({message: 'email required'})
             return
         }
 
@@ -167,19 +171,14 @@ module.exports = class UserController{
             res.status(422).json({message: 'obligatory phone'})
             return
         }
-        if(!password){
-            res.status(422).json({message: 'obligatory password'})
-            return
-        }
-        if(!confirmPassword){
-            res.status(422).json({message: 'obligatory confirm password'})
-            return
-        }
-        if(password !== confirmPassword){
-            res.status(422).json({message: 'obligatory same password'})
-            return
-        }
 
-        //
+        user.phone = phone
+        
+        if(password != confirmpassword){
+            res.status(422).json({message: `password incorrect`})
+            return
+        }
+        
+        
     }
 }
