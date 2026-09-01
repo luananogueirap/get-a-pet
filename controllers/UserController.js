@@ -134,14 +134,14 @@ module.exports = class UserController{
         const token = getToken(req)
         const user = await getUserByToken(token)
         
-        const name = req.body.name
-        const email = req.body.email
-        const phone = req.body.phone
-        const password = req.body.password
-        const confirmpassword = req.body.confirmpassword
+        const { name, email, phone, password, confirmpassword } = req.body || {}
 
 
         let image = ''
+
+        if(req.file){
+            image = req.file.filename
+        }
 
         //validations
 
