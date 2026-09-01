@@ -177,8 +177,23 @@ module.exports = class UserController{
         if(password != confirmpassword){
             res.status(422).json({message: `password incorrect`})
             return
+        } else if (password === confirmpassword && password != null){
+            const salt = await bcrypt.genSalt(12)
+            const passwordHash = await bcrypt.hash(password, salt)
+
+            user.password = passwordHash
         }
-        
-        
+
+        try{
+            await User.findOneAndUpdate(
+                {_id: user._id},
+                {$set: user},
+                {new : true}
+            )
+            res.status(200).json({message: 'user updated'})
+        } catch(err){
+            res.status(500).json({message: err})
+            return
+        }
     }
 }
