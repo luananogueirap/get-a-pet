@@ -1,7 +1,7 @@
 const mongoose = require('../db/conn')
 const { Schema } = mongoose
 
-const User = mongoose.model(
+const Pet = mongoose.model(
     'Pet',
     new Schema({
        name: {
