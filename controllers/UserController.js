@@ -171,11 +171,11 @@ module.exports = class UserController{
             res.status(422).json({message: 'obligatory password'})
             return
         }
-        if(!confirmpassword){
+        if(!confirmPassword){
             res.status(422).json({message: 'obligatory confirm password'})
             return
         }
-        if(password !== confirmpassword){
+        if(password !== confirmPassword){
             res.status(422).json({message: 'obligatory same password'})
             return
         }
