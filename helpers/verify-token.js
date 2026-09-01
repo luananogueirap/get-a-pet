@@ -4,7 +4,7 @@ const getToken = require('./get-token')
 const checkToken = (req, res, next) => {
 
     if(!req.headers.authorization){
-        return res.status(401).json({message: 'access dnied'})
+        return res.status(401).json({message: 'access denied'})
     }
 
     const token = getToken(req)
@@ -13,6 +13,13 @@ const checkToken = (req, res, next) => {
         return res.status(401).json({message: 'access denied'})
     }
 
+    try{
+        const verified = jwt.verify(token, 'nossosecret')
+        req.user = verified
+        next()
+    } catch(err){
+        return res.status(401).json({message: 'invalid token'})
+    }
 }
 
 module.exports = checkToken
