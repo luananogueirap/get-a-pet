@@ -34,7 +34,7 @@ module.exports = class PetController{
             return
         }
 
-        if(!images){
+        if(images.length === 0){
             res.status(422).json({message: 'images required'})
             return
         }
