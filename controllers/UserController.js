@@ -140,7 +140,7 @@ module.exports = class UserController{
         let image = ''
 
         if(req.file){
-            image = req.file.filename
+            user.image = req.file.filename
         }
 
         //validations
