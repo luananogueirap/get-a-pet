@@ -12,4 +12,7 @@ router.post(
        PetController.create
     )
 
+router.get('/', PetController.getAll)
+router.get('/mypets', verifyToken, PetController.getAllUserPets)
+
 module.exports = router
