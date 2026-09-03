@@ -118,6 +118,7 @@ module.exports = class PetController{
             return
         }
 
+        // check if pet exists
         const pet = await Pet.findOne({_id: id})
 
         if(!pet){
@@ -127,6 +128,159 @@ module.exports = class PetController{
         res.status(200).json({
             pet:pet
         })
+    }
+
+    static async removePetById(req, res){
+
+        const id = req.params.id
+
+        //check if id is valid
+        if(!ObjectId.isValid(id)){
+            res.status(422).json({message: 'invalid id'})
+            return
+    }
+        const pet = await Pet.findOne({_id: id})
+
+        if(!pet){
+            res.status(422).json({message: 'pet not found'})
+            return
+        }
+
+        //check if logged in user registered the pet
+        const token = getToken(req)
+        const user = await getUserByToken(token)
+
+        if(pet.user._id.toString() !== user._id.toString()){
+            res.status(422).json({message: 'solicitation error'})
+            return
+        }
+
+        await Pet.findByIdAndDelete(id)
+
+        res.status(200).json({message: 'pet removed'})
+
+    }
+
+    static async updatePet(req, res){
+
+    const id = req.params.id
+
+   const {name, age, weight, color, available} = req.body || {}
+
+   const images = req.files
+
+    const updateData = {}
+
+        // check if pet exists
+
+        const pet = await Pet.findOne({_id: id})
+
+        if(!pet){
+            res.status(404).json({message: 'pet not found'})
+            return
+        }
+
+        const token = getToken(req)
+        const user = await getUserByToken(token)
+
+        if(pet.user._id.toString() !== user._id.toString()){
+            res.status(422).json({message: 'solicitation error'})
+            return
+        }
+
+         if(!name){
+            res.status(422).json({message: 'name required'})
+            return
+        } else {
+            updateData.name = name
+        }
+
+        if(!age){
+            res.status(422).json({message: 'age required'})
+            return
+        } else {
+            updateData.age = age
+        }
+
+        if(!weight){
+            res.status(422).json({message: 'weight required'})
+            return
+        } else {
+            updateData.weight = weight
+        }
+
+        if(!color){
+            res.status(422).json({message: 'color required'})
+            return
+        } else {
+            updateData.color = color
+        }
+
+        if(images.length === 0){
+            res.status(422).json({message: 'images required'})
+            return
+        } else {
+            updateData.images = []
+            images.map((image) => {
+                updateData.images.push(image.filename)
+            })
+        }
+
+        await Pet.findByIdAndUpdate(id, updateData)
+
+        res.status(200).json({message: 'updated pet'})
+    }
+
+    static async schedule(req, res){
+        
+        const id = req.params.id
+
+        const pet = await Pet.findOne({_id: id})
+
+        if(!pet){
+            res.status(404).json({message: 'pet not found'})
+            return
+        }
+
+        const token = getToken(req)
+        const user = await getUserByToken(token)
+
+        if(pet.user._id.equals(user._id)){
+            res.status(422).json({message: 'you cant'})
+            return
+        }
+
+        // check if user has already scheduled a visit
+
+        if(pet.adopter){
+            if(pet.adopter._id.equals(user._id)){
+            res.status(422).json({message: 'you already'})
+            return
+            }
+        }
+
+        pet.adopter = {
+            _id: user_.id,
+            name: user.name,
+            image: user.image
+        }
+
+        await Pet.findByIdAndUpdate(id, pet)
+        res. status(200).json({message: `visit`})
+    }
+
+    static async concludeAdoption(req, res){
+
+        const id = req.params.id
+
+        
+        const pet = await Pet.findOne({_id: id})
+
+        if(!pet){
+            res.status(404).json({message: 'pet not found'})
+            return
+        }
+
     }
 
 }
