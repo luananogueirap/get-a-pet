@@ -281,6 +281,20 @@ module.exports = class PetController{
             return
         }
 
+        const token = getToken(req)
+        const user = await getUserByToken(token)
+
+        if(pet.user._id.toString() !== user._id.toString()){
+            res.status(422).json({message: 'solicitation error'})
+            return
+        }
+
+        pet.available = false
+
+        await Pet.findByIdAndUpdate(id, pet)
+
+        res.status(200).json({message: 'congratd! adoption conclude'})
+        
     }
 
 }

@@ -15,9 +15,4 @@ router.patch(
     imageUpload.single('image'),
     UserController.editUser
 )
-router.patch('/conclude/:id', 
-    verifyToken, 
-    PetController.concludeAdoption
-)
-
 module.exports = router
