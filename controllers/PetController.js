@@ -296,5 +296,4 @@ module.exports = class PetController{
         res.status(200).json({message: 'congratd! adoption conclude'})
         
     }
-
 }
