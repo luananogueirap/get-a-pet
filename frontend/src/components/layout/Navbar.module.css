@@ -1,0 +1,17 @@
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    padding: 1em 1.5em;
+    background-color: #FFD400;
+    color: #16479d;
+}
+
+.navbar_logo{
+    display: flex;
+    align-items: center;
+}
+
+.navbar_logo img{
+    width: 40px;
+    margin-right: 0.8em;
+}
