@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 
 // components
 import Navbar from './components/layout/Navbar'
@@ -12,10 +12,12 @@ import { UserProvider } from './context/UserContext'
 import Login from './components/pages/auth/Login'
 import Register from './components/pages/auth/Register'
 import Home from './components/pages/Home'
+import Profile from './components/pages/User/Profile'
+import MyPets from './components/pages/Pet/MyPets'
+import AddPet from './components/pages/Pet/AddPet'
 
 function App() {
   return (
-    <Router>
       <UserProvider>
       <Navbar />
         <Message/>
@@ -27,6 +29,15 @@ function App() {
       <Route path ="/register">
         <Register />
       </Route>
+      <Route path ="/user/profile">
+        <Profile />
+        </Route>
+      <Route path ="/pet/mypets">
+        <MyPets />
+        </Route>
+          <Route path ="/pet/add">
+        <AddPet />
+      </Route>
       <Route path ="/">
         <Home />
       </Route>
@@ -34,7 +45,6 @@ function App() {
         </Container>
       <Footer/>
       </UserProvider>
-    </Router>
   )
 }
 

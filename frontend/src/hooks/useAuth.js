@@ -20,7 +20,7 @@ export default function useAuth(){
 
     async function register(user){
 
-        let msgText = 'Sucessfull register'
+        let msgText = 'Registration successful'
         let msgType = 'success'
 
         try {
@@ -28,14 +28,37 @@ export default function useAuth(){
             await authUser(response.data)
 
         } catch(error){
-            msgText = error.response?.data?.message || 'Erro ao conectar com o servidor'
+            msgText = error.response?.data?.message || 'Unable to connect to the server'
             msgType = 'error'
         }
 
         setFlashMessage(msgText, msgType)
       }
 
-      async function authUser(data){
+
+      async function login(user){
+        let msgText = 'Login successful'
+        let msgType = 'success'
+
+        try{
+
+            const data = await api.post('/users/login', user)
+            .then((response) => {
+                return response.data
+            })
+
+            await authUser(data)
+
+        } catch(error){
+            msgText = error.response?.data?.message || 'Unable to connect to the server'
+            msgType = 'error'
+        }
+
+        setFlashMessage(msgText, msgType)
+
+      }
+
+    async function authUser(data){
 
         setAuthenticated(true)
 
@@ -46,7 +69,7 @@ export default function useAuth(){
       }
 
       function logout(){
-        const msgText = 'logout'
+        const msgText = 'Logged out successfully'
         const msgType = 'success'
 
         setAuthenticated(false)
@@ -56,5 +79,5 @@ export default function useAuth(){
         setFlashMessage(msgText, msgType)
       }
 
-    return {authenticated, register, logout}
+    return {authenticated, register, logout, login}
 }

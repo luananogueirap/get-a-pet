@@ -16,26 +16,34 @@ return(
         <img src={Logo} alt='Get A Pet'/>
         <h2>Get A Pet</h2>
     </div>
-    <ul>
+        <ul>
         <li>
-            <Link to='/'>Adopt</Link>
+          <Link to="/">Adopt</Link>
         </li>
         {authenticated ? (
-            <>
-              <li onClick={logout}>
-                Log out
-              </li>
-            </>
-            ) : ( 
-           <>
-        <li>
-            <Link to='/login'>Log In</Link>
-        </li>
-        <li>
-            <Link to='/register'>Register</Link>
-        </li>
-           </> )}
-    </ul>
+          <>
+            <li>
+              <Link to="/pet/myadoptions">My Adoptions</Link>
+            </li>
+            <li>
+              <Link to="/pet/mypets">My Pets</Link>
+            </li>
+            <li>
+              <Link to="/user/profile">My Profile</Link>
+            </li>
+            <li onClick={logout}>Log out</li>
+          </>
+        ) : (
+          <>
+            <li>
+              <Link to="/login">Log in</Link>
+            </li>
+            <li>
+              <Link to="/register">Register</Link>
+            </li>
+          </>
+        )}
+      </ul>
    </nav>
 )
     
