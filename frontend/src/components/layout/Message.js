@@ -7,11 +7,21 @@ function Message(){
     const [message, setMessage] = useState("")
     const [type, setType] = useState("")
 
+    function formatMessage(value){
+        if(typeof value === 'string') return value
+        if(value?.errors){
+            return Object.values(value.errors)
+                .map((error) => error.message)
+                .join(' ')
+        }
+        return value?.message || 'Ocorreu um erro inesperado'
+    }
+
     useEffect(() => {
 
         bus.addListener('flash', ({message, type}) => {
             setVisibility(true)
-            setMessage(message)
+            setMessage(formatMessage(message))
             setType(type)
 
             setTimeout(() => {

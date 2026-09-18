@@ -37,7 +37,7 @@ function Profile() {
       })
       .catch(() => {
         if (active) {
-          setFlashMessage('Unable to load user data', 'error')
+          setFlashMessage('Não foi possível carregar os dados do usuário', 'error')
         }
       })
 
@@ -105,7 +105,7 @@ function Profile() {
       </div>
       <form onSubmit={handleSubmit} className={formStyles.form_container}>
         <Input
-          text="Imagem"
+          text="Image"
           type="file"
           name="image"
           handleOnChange={onFileChange}
@@ -119,7 +119,7 @@ function Profile() {
           value={user.email || ''}
         />
         <Input
-          text="Nome"
+          text="Name"
           type="text"
           name="name"
           placeholder="Enter your name"
@@ -127,7 +127,7 @@ function Profile() {
           value={user.name || ''}
         />
         <Input
-          text="Tellphone"
+          text="Telephone"
           type="text"
           name="phone"
           placeholder="Enter your phone number"
@@ -148,7 +148,7 @@ function Profile() {
           placeholder="Confirm your password"
           handleOnChange={handleChange}
         />
-        <input type="submit" value="Editar" />
+        <input type="submit" value="Edit" />
       </form>
     </section>
   )

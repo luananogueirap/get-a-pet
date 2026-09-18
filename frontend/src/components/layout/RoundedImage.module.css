@@ -1,11 +1,12 @@
-.round_image{
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    object-fit: cover;
+.round_image {
+  width: 200px;
+  height: 200px;
+  border-radius: 2px;
+  object-fit: cover;
+  border: 1px solid #bf8aa8;
 }
 
-.round_image.px75{
-    width: 75px;
-    height: 75px;
+.round_image.px75 {
+  width: 75px;
+  height: 75px;
 }

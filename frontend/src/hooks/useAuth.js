@@ -20,7 +20,7 @@ export default function useAuth(){
 
     async function register(user){
 
-        let msgText = 'Registration successful'
+        let msgText = 'Cadastro realizado com sucesso'
         let msgType = 'success'
 
         try {
@@ -28,7 +28,7 @@ export default function useAuth(){
             await authUser(response.data)
 
         } catch(error){
-            msgText = error.response?.data?.message || 'Unable to connect to the server'
+            msgText = error.response?.data?.message || 'Não foi possível conectar ao servidor'
             msgType = 'error'
         }
 
@@ -37,7 +37,7 @@ export default function useAuth(){
 
 
       async function login(user){
-        let msgText = 'Login successful'
+        let msgText = 'Login realizado com sucesso'
         let msgType = 'success'
 
         try{
@@ -50,7 +50,7 @@ export default function useAuth(){
             await authUser(data)
 
         } catch(error){
-            msgText = error.response?.data?.message || 'Unable to connect to the server'
+            msgText = error.response?.data?.message || 'Não foi possível conectar ao servidor'
             msgType = 'error'
         }
 
@@ -69,7 +69,7 @@ export default function useAuth(){
       }
 
       function logout(){
-        const msgText = 'Logged out successfully'
+        const msgText = 'Logout realizado com sucesso'
         const msgType = 'success'
 
         setAuthenticated(false)

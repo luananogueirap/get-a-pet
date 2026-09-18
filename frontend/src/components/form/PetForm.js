@@ -4,13 +4,16 @@ import formStyles from './Form.module.css'
 import Input from './Input'
 import Select from './Select'
 
-function PetForm(handleSubmit, petData, btnText){
+function PetForm({ handleSubmit, petData, btnText }){
 
     const [pet, setPet] = useState(petData || {})
+    const [preview, setPreview] = useState([])
     const colors = ["White", "Brown", "Orange", "Caramel"]
 
     function onFileChange(e){
-      setPet({...pet, images: [...e.target.files]})
+      const images = Array.from(e.target.files || [])
+      setPreview(images)
+      setPet({...pet, images})
     }
 
     function handleChange(e){
@@ -27,7 +30,26 @@ function PetForm(handleSubmit, petData, btnText){
     }
 
     return (
-       <form className={formStyles.form_container}>
+       <form className={formStyles.form_container} onSubmit={submit}>
+        <div className={formStyles.preview_pet_images}>
+          {preview.length > 0
+            ? preview.map((image, index) => (
+                <img src={URL.createObjectURL(image)} 
+                className={formStyles.preview_pet_images_img}
+                alt={pet.name} 
+                key={`${pet.name} + ${index}`} 
+                />
+            )): 
+          pet.images &&
+          pet.images.map((image, index) => (
+                <img src={`${process.env.REACT_APP_API}/images/pets/${image}`} 
+                className={formStyles.preview_pet_images_img}
+                alt={pet.name} 
+                key={`${pet.name} + ${index}`} 
+                />
+          ))
+        }
+        </div>
             <Input 
               text="Pet images"
               type="file"
@@ -40,7 +62,7 @@ function PetForm(handleSubmit, petData, btnText){
               type="text"
               name="name"
               placeholder="Pets name"
-              handleOnChange={onFileChange}          
+              handleOnChange={handleChange}          
               value={pet.name || ''}
             />
              <Input 
@@ -48,7 +70,7 @@ function PetForm(handleSubmit, petData, btnText){
               type="text"
               name="age"
               placeholder="Pets age"
-              handleOnChange={onFileChange}          
+              handleOnChange={handleChange}          
               value={pet.age || ''}
             />
              <Input 
@@ -56,7 +78,7 @@ function PetForm(handleSubmit, petData, btnText){
               type="number"
               name="weight"
               placeholder="Pets weight"
-              handleOnChange={onFileChange}          
+              handleOnChange={handleChange}          
               value={pet.weight || ''}
             />
             <Select
