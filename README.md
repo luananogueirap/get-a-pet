@@ -231,16 +231,6 @@ A variável `REACT_APP_API` é utilizada nas imagens dos pets. O endereço do Ax
 | `npm run build` | Gera a versão de produção em `frontend/build/`. |
 | `npm test` | Inicia o test runner configurado pelo react-scripts. Não foram encontrados testes próprios no código analisado. |
 
-## Pendências identificadas na leitura do código
-
-- Incluir o backend e validar a integração completa.
-- Conectar o `onSubmit` do formulário em `Login.js` à função `handleSubmit`, que já existe no componente.
-- Ajustar a chamada de conclusão de adoção em `MyPets.js`: a configuração de cabeçalhos está no segundo argumento de `api.patch`, posição destinada ao corpo da requisição.
-- Estabilizar a referência de `setFlashMessage`, usada como dependência de efeitos em algumas páginas, para evitar novas consultas a cada renderização.
-- Implementar tratamento consistente de sessão inválida e acesso às telas autenticadas. Atualmente, as rotas em `App.js` não possuem um componente de proteção.
-- Centralizar os endereços da API e das imagens na configuração de ambiente.
-
-Esta documentação foi elaborada por inspeção dos arquivos. Não representa uma validação por execução, build ou testes de ponta a ponta.
 
 ## Conceitos presentes no projeto
 
