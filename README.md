@@ -1,3 +1,6 @@
+
+<img width="939" height="462" alt="Captura de tela 2026-09-17 224733" src="https://github.com/user-attachments/assets/f81bd872-b59b-4196-99ef-6087e611a221" />
+
 # 🐾 Get A Pet
 
 Interface web para uma plataforma de adoção de animais. O objetivo é conectar pessoas interessadas em adotar um pet a quem deseja disponibilizar um animal para adoção.
