@@ -1,9 +1,10 @@
-.footer{
-    height: 250px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #eee;
-    color: #444;
-    border-top: 1px solid #666;
+.footer {
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #edc1d9;
+  color: #9e6688;
+  border-top: 1px solid #c995b2;
+  font-size: 0.75rem;
 }

@@ -1,29 +1,55 @@
 import {Link} from 'react-router-dom'
+import {useContext} from 'react'
+
 
 import styles from './Navbar.module.css'
 import Logo from '../../assets/img/logo.png'
+import {Context} from '../../context/UserContext'
 
 function Navbar(){
+
+    const{authenticated, logout} = useContext(Context)
+
 return(
    <nav className={styles.navbar}>
     <div className={styles.navbar_logo}>
         <img src={Logo} alt='Get A Pet'/>
         <h2>Get A Pet</h2>
     </div>
-    <ul>
+        <ul>
         <li>
-            <Link to='/'>Adopt</Link>
+          <Link to="/">Adopt</Link>
         </li>
-        <li>
-            <Link to='/login'>Log In</Link>
-        </li>
-        <li>
-            <Link to='/register'>Register</Link>
-        </li>
-    </ul>
+        {authenticated ? (
+          <>
+            <li>
+              <Link to="/pet/myadoptions">My Adoptions</Link>
+            </li>
+            <li>
+              <Link to="/pet/mypets">My Pets</Link>
+            </li>
+            <li>
+              <Link to="/user/profile">My Profile</Link>
+            </li>
+            <li onClick={logout}>Log out</li>
+          </>
+        ) : (
+          <>
+            <li>
+              <Link to="/login">Log in</Link>
+            </li>
+            <li>
+              <Link to="/register">Register</Link>
+            </li>
+          </>
+        )}
+      </ul>
    </nav>
 )
-
+    
 }
+
+
+
 
 export default Navbar

@@ -1,32 +1,59 @@
-.form_container{
-    max-width: 300px;
-    margin: 0 auto;
-    background-color: #fff;
-    border-radius: 15px;
+.form_container {
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  background-color: rgba(255, 229, 243, 0.5);
+  border: 1px solid #c28cab;
+  border-radius: 2px;
 }
 
-.form_container input[type='submit']{
-    border-radius: 8px;
-    background-color: #25b456;
-    color: #fff;
-    border: none;
-    min-width: 100px;
-    min-height: 2.5em;
-    width: 100%;
-    cursor: pointer;
-    font-size: 1.1em;
-    font-weight: bold;
+.form_container h1 {
+  text-align: center;
+  margin-bottom: 1.25rem;
 }
 
-.form_container input[type='submit']:hover{
-    background-color: #1C8A42;
+.form_container input[type='submit'] {
+  border: 1px solid #9e6688;
+  border-radius: 2px;
+  background-color: #b6789d;
+  color: #fff5fb;
+  min-width: 100px;
+  min-height: 2.5rem;
+  width: 100%;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: bold;
+  letter-spacing: 0.04em;
+}
+
+.form_container input[type='submit']:hover {
+  background-color: #986181;
 }
 
 .form_container p {
-    margin-top: 1em;
+  margin-top: 1rem;
+  color: #8c5d7a;
+  font-size: 0.85rem;
 }
 
-.form_container p a{
-    color: #16479D;
-    font-weight: bold;
+.form_container p a {
+  color: #9e6688;
+  font-weight: bold;
+}
+
+/* form pets */
+
+.preview_pet_images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.preview_pet_images_img {
+  width: 135px;
+  height: 135px;
+  object-fit: cover;
+  border: 1px solid #bf8aa8;
 }
